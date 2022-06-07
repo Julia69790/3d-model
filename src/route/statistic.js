@@ -8,10 +8,15 @@
 //   )
 // }
 
-import React, { PureComponent } from 'react';
+import React, { PureComponent, useState } from 'react';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
 import {
   LineChart,
+  BarChart,
   Line,
+  Bar,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -67,6 +72,40 @@ const data = [
 ];
 
 export default function Statistic() {
+  const [ value, setValue ] = useState('Line');
+
+  const handleChangeType = (e) => {
+    setValue(e.target.value)
+  }
+
+  const SwitchCharts = () => {
+    return (
+      
+      <RadioGroup
+        aria-labelledby="group-label"
+        defaultValue="Line"
+        name="radio-buttons-group"
+        onChange={handleChangeType}
+      >
+        <FormControlLabel value="Line" control={<Radio />} label="LineChart" />
+        <FormControlLabel value="Bar" control={<Radio />} label="BarChart" />
+      </RadioGroup>
+      
+    )
+  }
+
+  return (
+    <div>
+      {value == 'Line' ? <ChartLine /> : <ChartBar />}      
+      <SwitchCharts/>
+
+    </div>
+  )
+}
+
+
+
+const ChartLine = () => {
   return (
     <LineChart
       width={500}
@@ -91,33 +130,31 @@ export default function Statistic() {
         activeDot={{ r: 8 }}
       />
       <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+      <Line type="monotone" dataKey="amt" stroke="#82ca9d" />
     </LineChart>
   )
 }
 
-
-
-// export default function Statistic() {
-//   let invoices = getInvoices();
-//   return (
-//     <div style={{ display: "flex" }}>
-//       <nav
-//         style={{
-//           borderRight: "solid 1px",
-//           padding: "1rem",
-//         }}
-//       >
-//         {invoices.map((invoice) => (
-//           <Link
-//             style={{ display: "block", margin: "1rem 0" }}
-//             to={`/statistic/${invoice.number}`}
-//             key={invoice.number}
-//           >
-//             {invoice.name}
-//           </Link>
-//         ))}
-//       </nav>
-//       <Outlet />
-//     </div>
-//   );
-//   }
+const ChartBar = () => {
+  return (
+    <BarChart
+          width={500}
+          height={300}
+          data={data}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="pv" fill="#8884d8" />
+          <Bar dataKey="uv" fill="#82ca9d" />
+        </BarChart>
+  )
+}

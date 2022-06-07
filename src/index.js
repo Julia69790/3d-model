@@ -16,19 +16,20 @@ const root = ReactDOM.createRoot(document.getElementById("root"))
 root.render(
     <BrowserRouter>
         <Routes>
-            <Route path="/" element={<App />} />
-            <Route path="models" element={<MenuModel />} >
-                <Route path=":modelId" element={<ChangeModel />} />
+            <Route path="/" element={<App />} >
+                <Route path="models" element={<MenuModel />} >
+                    <Route path=":modelId" element={<ChangeModel />} />
+                </Route>
+                <Route path="statistic" element={<Statistic />} />
+                <Route
+                    path="*"
+                    element={
+                        <main style={{ padding: "1rem" }}>
+                            <p>There's nothing here!</p>
+                        </main>
+                    }
+                />
             </Route>
-            <Route path="statistic" element={<Statistic />} />
-            <Route
-                path="*"
-                element={
-                    <main style={{ padding: "1rem" }}>
-                        <p>There's nothing here!</p>
-                    </main>
-                }
-            />
         </Routes>
     </BrowserRouter>
 
