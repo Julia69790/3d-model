@@ -117,7 +117,9 @@ const data2 = [
 ];
 
 export default function Statistic() {
-  const [ value, setValue ] = useState('Line');
+  const [value, setValue] = useState('Line')
+  const data = [data1, data2]
+
   const handleChangeType = (e) => {
     setValue(e.target.value)
   }
@@ -133,44 +135,26 @@ export default function Statistic() {
         <FormControlLabel value="Line" control={<Radio />} label="LineChart" />
         <FormControlLabel value="Bar" control={<Radio />} label="BarChart" />
       </RadioGroup>
-      
+
     )
   }
-
   return (
     <div>
-      {value == 'Line' ? <ChartLine /> : <ChartBar />}     
-      <SwitchCharts/>
-      {value == 'Line' ? <ChartLine /> : <ChartBar />}      
-      <SwitchCharts/>
+    {
+      data.map((d, index) => ( 
+        value == 'Line' ? <ChartLine key={index} data={d}/> : <ChartBar key={index} data={d}/>
+        ))}
+      <SwitchCharts />
     </div>
   )
 }
 
-const ChartLine = () => {
-  // const [count, setCount] = useState(1)
-  // let data = data1
-
-  // const switchData = () =>{
-  //   if (count%2 == 0){
-  //     data = data2
-  //     return(
-  //       data
-  //     )
-  //   }
-  //   else {
-  //     data = data1
-  //     return (
-  //       data
-  //     )
-  //   }
-  // }
-
+const ChartLine = ({data}) => {
   return (
     <LineChart
       width={500}
       height={300}
-      data={data1}
+      data={data}
       margin={{
         top: 5,
         right: 30,
@@ -195,26 +179,27 @@ const ChartLine = () => {
   )
 }
 
-const ChartBar = () => {
+const ChartBar = ({data}) => {
   return (
     <BarChart
-          width={500}
-          height={300}
-          data={data1}
-          margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="pv" fill="#8884d8" />
-          <Bar dataKey="uv" fill="#82ca9d" />
-        </BarChart>
+      width={500}
+      height={300}
+      data={data}
+      margin={{
+        top: 5,
+        right: 30,
+        left: 20,
+        bottom: 5,
+      }}
+    >
+      <CartesianGrid strokeDasharray="3 3" />
+      <XAxis dataKey="name" />
+      <YAxis />
+      <Tooltip />
+      <Legend />
+      <Bar dataKey="pv" fill="#8884d8" />
+      <Bar dataKey="uv" fill="#82ca9d" />
+    </BarChart>
   )
 }
+
