@@ -20,10 +20,9 @@ export default function ModelOne({ ...props }) {
             {...props}
             dispose={null}
             scale={clicked ? 1.2 : 1}
-            // onClick={(event) => click(!clicked)}
+            onClick={(event) => click(!clicked)}
             onPointerOver={(event) => hover(true)}
             onPointerOut={(event) => hover(false)}
-          // dispatchEvent={(event) => <text>information</text>}
           >
             <group rotation={[-Math.PI / 2, 0, 0]}>
               <group rotation={[Math.PI / 2, -1, 0]}>

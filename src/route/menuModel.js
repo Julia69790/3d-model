@@ -1,57 +1,41 @@
-
-import React from 'react';
-import { Link, Outlet } from "react-router-dom";
-import {getModels} from "../data"
-
+import React, {useState} from 'react';
+import { Link, Outlet, useNavigate } from "react-router-dom";
+import { getModels } from "../data/data"
+import Tabs from '@mui/material/Tabs'
+import Tab from '@mui/material/Tab'
+import Box from '@mui/material/Box'
 
 export default function MenuModel() {
-    // render() {
-    // const match = useRouteMatch()
-    let models = getModels()
-    return (
-      <div style={{ display: "flex" }}>
-        <nav
-          style={{
-            borderRight: "solid 1px",
-            padding: "1rem",
-          }}>
-          {models.map((model) => (
-            <Link
-              style={{ display: "block", margin: "1rem 0" }}
-              to={`/models/${model.number}`}
-              key={model.number}
-            >
-              {`model${model.number}`}
-            </Link>
-          ))}
-        </nav>
-        <Outlet />
-      </div>
-    )
-    {/* <ul>
-          <li>
-            <Link to={`${match.url}/model1`}>model1</Link>
-          </li>
-          <li>
-            <Link to={`${match.url}/model2`}>model2</Link>
-          </li>
-        </ul>
-  
-        <Switch>
-          <Route path={`${match.path}/:modelId`}>
-            <Model />
-          </Route>
-          {/* <Route path={path}>
-            <h3>модель 2</h3>
-          </Route> */}
-    // </Switch> */}
-  
-  
-  
-    // <div>
-    //   {models.map((value, index) =>{
-    //     return <div key={index}><LinkModel label={value} /></div>
-    //   })}
-    // </div>
-    //  }
+  let models = getModels()
+  let navigate = useNavigate()
+  const [value, setValue] = useState('1')
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue)
   }
+
+  return (
+    <Box sx={{ width: '20%' }}>
+    <nav
+        style={{
+          padding: "1rem",
+        }}>
+        <Tabs
+          orientation="vertical"
+          value={value}
+          onChange={handleChange}
+          textColor="secondary"
+          indicatorColor="secondary"
+          aria-label="Vertical tabs example"
+          sx={{ borderRight: 1, borderColor: 'divider' }}
+        >
+          {models.map((model, index) => (
+            <Tab value={`${index+1}`} label={`${model.name}`} key={index+1} onClick={() => {navigate(`/models/${index+1}`)}} />
+          ))}
+        </Tabs>
+        </nav>
+      <Outlet />
+    </Box>
+  )
+}
+  

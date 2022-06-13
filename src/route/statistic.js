@@ -26,7 +26,7 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 
-const data = [
+const data1 = [
   {
     name: 'Page A',
     uv: 4000,
@@ -71,16 +71,59 @@ const data = [
   },
 ];
 
+const data2 = [
+  {
+    name: 'Page A',
+    uv: 0,
+    pv: 2400,
+    amt: 2400,
+  },
+  {
+    name: 'Page B',
+    uv: 0,
+    pv: 1398,
+    amt: 2210,
+  },
+  {
+    name: 'Page C',
+    uv: 0,
+    pv: 9800,
+    amt: 2290,
+  },
+  {
+    name: 'Page D',
+    uv: 0,
+    pv: 3908,
+    amt: 2000,
+  },
+  {
+    name: 'Page E',
+    uv: 0,
+    pv: 4800,
+    amt: 2181,
+  },
+  {
+    name: 'Page F',
+    uv: 0,
+    pv: 3800,
+    amt: 2500,
+  },
+  {
+    name: 'Page G',
+    uv: 0,
+    pv: 4300,
+    amt: 2100,
+  },
+];
+
 export default function Statistic() {
   const [ value, setValue ] = useState('Line');
-
   const handleChangeType = (e) => {
     setValue(e.target.value)
   }
 
   const SwitchCharts = () => {
     return (
-      
       <RadioGroup
         aria-labelledby="group-label"
         defaultValue="Line"
@@ -96,21 +139,38 @@ export default function Statistic() {
 
   return (
     <div>
+      {value == 'Line' ? <ChartLine /> : <ChartBar />}     
+      <SwitchCharts/>
       {value == 'Line' ? <ChartLine /> : <ChartBar />}      
       <SwitchCharts/>
-
     </div>
   )
 }
 
-
-
 const ChartLine = () => {
+  // const [count, setCount] = useState(1)
+  // let data = data1
+
+  // const switchData = () =>{
+  //   if (count%2 == 0){
+  //     data = data2
+  //     return(
+  //       data
+  //     )
+  //   }
+  //   else {
+  //     data = data1
+  //     return (
+  //       data
+  //     )
+  //   }
+  // }
+
   return (
     <LineChart
       width={500}
       height={300}
-      data={data}
+      data={data1}
       margin={{
         top: 5,
         right: 30,
@@ -140,7 +200,7 @@ const ChartBar = () => {
     <BarChart
           width={500}
           height={300}
-          data={data}
+          data={data1}
           margin={{
             top: 5,
             right: 30,
