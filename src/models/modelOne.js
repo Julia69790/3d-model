@@ -4,15 +4,12 @@ import { useGLTF, OrbitControls } from '@react-three/drei'
 import React from 'react'
 
 export default function ModelOne({ ...props }) {
-    // let params = useParams()
-    // let model = getModel(parseInt(params.modelId, 10))
     const group = useRef()
     const [hovered, hover] = useState(false)
     const [clicked, click] = useState(false)
-    // const snap = useProxy(state)
     const { nodes, materials } = useGLTF('/distance-sensor-draco.glb')
     return (
-      <Suspense fallback={null}>
+ <Suspense fallback={null}>
         <Canvas>
           <ambientLight intensity={0.5} />
           <group
@@ -36,5 +33,8 @@ export default function ModelOne({ ...props }) {
           <OrbitControls />
         </Canvas>
       </Suspense>
+
+
+     
     )
   }

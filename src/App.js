@@ -17,26 +17,33 @@ export default function App() {
   }
 
   return (
-    <Box sx={{ width: '100%' }}>
-      <h1>Агробизнес</h1>
-      <nav
-        style={{
-          borderBottom: "solid 1px",
-          paddingBottom: "1rem",
-        }}>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          textColor="secondary"
-          indicatorColor="secondary"
-          aria-label="secondary tabs example"
-        >
-          <Tab value="zero" label="Главная" onClick={() => { navigate("/") }} />
-          <Tab value="one" label="Модели" onClick={() => { navigate("/models") }} />
-          <Tab value="two" label="Статистика" onClick={() => { navigate("/statistic") }} />
-        </Tabs>
-      </nav>
-      <Outlet />
-    </Box>
+    <div 
+    >
+      <Box 
+      sx={{ width: '100%' }}
+      >
+       <center><h1>Агробизнес</h1></center> 
+        <nav
+          style={{
+            // borderBottom: "solid 1px",
+            paddingBottom: "1rem",
+          }}
+          >
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            textColor="secondary"
+            indicatorColor="secondary"
+            aria-label="secondary tabs example"
+            
+          >
+            <Tab  style={{width:"33%", maxWidth: 1000}} value="zero" label="Главная" onClick={() => { navigate("/") }} />
+            <Tab style={{width:"33%", maxWidth: 1000}} value="one" label="Модели" onClick={() => { navigate("/models") }} />
+            <Tab style={{width:"33%", maxWidth: 1000}} value="two" label="Статистика" onClick={() => { navigate("/statistic") }} />
+          </Tabs>
+        </nav>
+        <Outlet />
+      </Box>
+    </div>
   )
 }

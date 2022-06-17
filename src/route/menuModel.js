@@ -8,7 +8,7 @@ import Box from '@mui/material/Box'
 export default function MenuModel() {
   let models = getModels()
   let navigate = useNavigate()
-  const [value, setValue] = useState('1')
+  const [value, setValue] = useState(null)
 
   const handleChange = (event, newValue) => {
     setValue(newValue)
